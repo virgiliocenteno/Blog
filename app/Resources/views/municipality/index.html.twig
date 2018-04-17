@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Municipalities list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for municipality in municipalities %}
+            <tr>
+                <td><a href="{{ path('municipality_show', { 'id': municipality.id }) }}">{{ municipality.id }}</a></td>
+                <td>{{ municipality.name }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('municipality_show', { 'id': municipality.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('municipality_edit', { 'id': municipality.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('municipality_new') }}">Create a new municipality</a>
+        </li>
+    </ul>
+{% endblock %}

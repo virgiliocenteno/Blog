@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Address creation</h1>
+
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <input type="submit" value="Create" />
+    {{ form_end(form) }}
+
+    <ul>
+        <li>
+            <a href="{{ path('address_index') }}">Back to the list</a>
+        </li>
+    </ul>
+{% endblock %}
+
+ {% block javascripts %}
+ <!-- jQuery 2.2.4 -->
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+ 
+ <script>
+             $("#appbundle_address_state").change(function () {
+                if ($('#appbundle_address_state').val() !== ' ') {
+                    // Ajax                                                 
+                    var dataString = 'id=' + $('#appbundle_address_state').val();
+                    $.ajax
+                            ({
+                                type: "POST",
+                                url: "{{ path ('ajax_municipality') }}",
+                                data: dataString,
+                                cache: false,
+                                success: function (html)
+                                {
+                                    $('#appbundle_address_municipality option ').remove();
+                                    $('#appbundle_address_municipality').append(html);                                    
+                                }
+                            });
+
+                }
+            });
+</script>
+
+ {% endblock %}
